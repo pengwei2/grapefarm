@@ -4,4 +4,5 @@ public class BaseController {
     public enum SendType {
         register, forget
     }
+
 }

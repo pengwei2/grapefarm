@@ -13,12 +13,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "user_name",nullable = false)
+    @Column(name = "user_name")
     private String userName;
 
     @Column(name = "pass_word",nullable = false)
     private String password;
 
+    //TODO 唯一约束
     @Column(nullable = false)
     private String email;
 

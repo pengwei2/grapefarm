@@ -2,6 +2,7 @@ package com.pw.grapefarm.controllers;
 
 import com.pw.grapefarm.commons.Response;
 import com.pw.grapefarm.daos.EmailCodeDao;
+import com.pw.grapefarm.daos.UserDao;
 import com.pw.grapefarm.models.EmailCode;
 import com.pw.grapefarm.services.MailService;
 import com.pw.grapefarm.utils.CommonUtil;
@@ -21,6 +22,9 @@ import java.util.Date;
 public class EmailCodeController extends BaseController{
 
     @Autowired
+    UserDao userDao;
+
+    @Autowired
     EmailCodeDao emailCodeDao;
     
     @Autowired
@@ -34,16 +38,20 @@ public class EmailCodeController extends BaseController{
     public Response sendEmailCode(String email) throws MessagingException {
         //TODO 邮箱需要验证
 
+        // 如果该邮件对应的用户已存在，则发送获取验证码失败
+        if(userDao.findByEmail(email) != null){
+            return new Response(HttpStatus.BAD_REQUEST.value(),"失败","该邮件已经注册！");
+        }
+
         String code = CommonUtil.genRandomStr();
 
         EmailCode emailCode = new EmailCode();
-        emailCode.setCode(CommonUtil.genRandomStr());
+        emailCode.setCode(code);
         emailCode.setEmail(email);
         emailCode.setSendType(SendType.register.name());
         emailCode.setSendTime(new Date());
         emailCodeDao.save(emailCode);
 
-        //TODO 发送验证码给指定邮箱
         Context context = new Context();
         context.setVariable("emailCode", code);
         String emailContent = templateEngine.process("registerTemplate", context);
