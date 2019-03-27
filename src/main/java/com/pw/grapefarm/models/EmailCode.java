@@ -7,8 +7,8 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "t_email_verify_record")
-public class EmailVerifyRecord {
+@Table(name = "t_email_code")
+public class EmailCode {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -19,6 +19,10 @@ public class EmailVerifyRecord {
     @Column(nullable = false)
     private String email;
 
+    /**
+     * register 注册账号
+     * forget   忘记密码
+     */
     @Column(name = "send_type",nullable = false)
     private String sendType;
 

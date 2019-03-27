@@ -3,6 +3,11 @@ package com.pw.grapefarm.utils;
 import java.util.Random;
 
 public class CommonUtil {
+
+    public static String genRandomStr(){
+        return genRandomStr(6);
+    }
+
     public static String genRandomStr(int randomLength){
         String code = "";
 

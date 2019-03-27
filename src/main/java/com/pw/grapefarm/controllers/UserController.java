@@ -21,7 +21,6 @@ public class UserController {
     public ResponseEntity<Object> createUser(){
         User user = new User();
         user.setEmail("aa");
-        user.setPasswd("xx");
         user.setUserName("saa");
         user.setCreateTime(new Date());
         user.setUpdateTime(new Date());
