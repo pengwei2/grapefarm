@@ -1,8 +1,6 @@
 package com.pw.grapefarm.models;
 
 import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,15 +16,18 @@ public class User {
     @Column(name = "user_name",nullable = false)
     private String userName;
 
-    @Column(nullable = false)
-    private String passwd;
+    @Column(name = "pass_word",nullable = false)
+    private String password;
 
     @Column(nullable = false)
     private String email;
 
-    @CreatedDate
+    @Column(name = "create_time")
     private Date createTime;
 
-    @LastModifiedDate
+    @Column(name = "update_time")
     private Date updateTime;
+
+    @Column(name = "farm_name")
+    private String farmName;
 }
