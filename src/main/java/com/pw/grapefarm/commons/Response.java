@@ -3,21 +3,17 @@ package com.pw.grapefarm.commons;
 import lombok.Data;
 
 @Data
-public class Response {
+public class Response<T> {
     private Integer statusCode;
 
     private String statusDesc;
 
-    private String data;
+    private T data;
 
     public Response() {
     }
 
-    public Response(Integer statusCode, String statusDesc) {
-        this(statusCode,statusDesc,"");
-    }
-
-    public Response(Integer statusCode, String statusDesc, String data) {
+    public Response(Integer statusCode, String statusDesc, T data) {
         this.statusCode = statusCode;
         this.statusDesc = statusDesc;
         this.data = data;
