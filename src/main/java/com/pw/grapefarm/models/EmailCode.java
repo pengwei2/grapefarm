@@ -3,6 +3,8 @@ package com.pw.grapefarm.models;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Data
@@ -16,7 +18,9 @@ public class EmailCode {
     @Column(nullable = false)
     private String code;
 
-    @Column(nullable = false)
+    @Column
+    @NotBlank(message = "邮箱不能为空")
+    @Email
     private String email;
 
     /**

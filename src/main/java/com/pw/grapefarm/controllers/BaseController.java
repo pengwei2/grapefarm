@@ -5,4 +5,9 @@ public class BaseController {
         register, forget
     }
 
+    public enum StatusCode{
+        success,fail
+    }
+
+
 }

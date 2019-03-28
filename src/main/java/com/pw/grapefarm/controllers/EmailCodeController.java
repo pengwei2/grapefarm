@@ -8,13 +8,17 @@ import com.pw.grapefarm.services.MailService;
 import com.pw.grapefarm.utils.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import javax.mail.MessagingException;
+import javax.validation.Valid;
 import java.util.Date;
 
 @RestController
@@ -35,12 +39,18 @@ public class EmailCodeController extends BaseController{
 
 
     @PostMapping
-    public Response sendEmailCode(String email) throws MessagingException {
-        //TODO 邮箱需要验证
+    public Response sendEmailCode(@Valid @RequestBody EmailCode input, BindingResult bindingResult) throws MessagingException {
+        if(bindingResult.hasErrors()){
+            for(ObjectError error : bindingResult.getAllErrors()){
+                return new Response(StatusCode.fail.ordinal(),"失败",error.getDefaultMessage());
+            }
+        }
+
+        String email = input.getEmail();
 
         // 如果该邮件对应的用户已存在，则发送获取验证码失败
         if(userDao.findByEmail(email) != null){
-            return new Response(HttpStatus.BAD_REQUEST.value(),"失败","该邮件已经注册！");
+            return new Response(StatusCode.fail.ordinal(),"失败","该邮件已经注册！");
         }
 
         String code = CommonUtil.genRandomStr();
@@ -57,6 +67,6 @@ public class EmailCodeController extends BaseController{
         String emailContent = templateEngine.process("registerTemplate", context);
         mailService.sendHtmlMail(email,"用户注册码",null,emailContent);
 
-        return new Response(HttpStatus.OK.value(),"成功");
+        return new Response(StatusCode.success.ordinal(),"成功");
     }
 }
