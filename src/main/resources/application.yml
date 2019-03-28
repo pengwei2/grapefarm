@@ -1,0 +1,30 @@
+# 指定哪个配置文件生效
+spring:
+  profiles:
+    active: prd
+  mail:
+    host: smtp.qq.com
+    username: 825619590@qq.com
+    password: emmrcvwlalchbbjg # qq 邮箱配置的密码，非邮箱登录密码，在邮箱开启 smtp 的设置处配置，需要绑定手机并发短信才能设置
+    defaultEncoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+          auth: true
+          ssl:
+            trust: smtp.qq.com
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+            port: 465
+          starttls:
+            enable: true
+            required: true
+
+
+mail:
+  fromMail:
+    addr: 825619590@qq.com
+
