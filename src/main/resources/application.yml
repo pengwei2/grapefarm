@@ -1,7 +1,7 @@
 # 指定哪个配置文件生效
 spring:
   profiles:
-    active: prd
+    active: pre
   mail:
     host: smtp.qq.com
     username: 825619590@qq.com

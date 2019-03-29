@@ -9,5 +9,4 @@ public class BaseController {
         success,fail
     }
 
-
 }

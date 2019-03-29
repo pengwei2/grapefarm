@@ -1,5 +1,6 @@
 package com.pw.grapefarm.controllers;
 
+import com.pw.grapefarm.annotations.ParamValid;
 import com.pw.grapefarm.commons.Response;
 import com.pw.grapefarm.daos.EmailCodeDao;
 import com.pw.grapefarm.daos.UserDao;
@@ -36,21 +37,17 @@ public class EmailCodeController extends BaseController{
     @Autowired
     TemplateEngine templateEngine;
 
-
+    @ParamValid
     @PostMapping
     public Response<String> sendEmailCode(@Valid @RequestBody EmailCode input, BindingResult bindingResult) throws MessagingException {
-        if(bindingResult.hasErrors()){
-            for(ObjectError error : bindingResult.getAllErrors()){
-                return new Response<>(StatusCode.fail.ordinal(),"失败",error.getDefaultMessage());
-            }
-        }
-
         String email = input.getEmail();
 
         // 如果该邮件对应的用户已存在，则发送获取验证码失败
         if(userDao.findByEmail(email) != null){
             return new Response<>(StatusCode.fail.ordinal(),"失败","该邮箱已经注册！");
         }
+
+        // TODO 同一个邮件一分钟内只允许发送一次注册用户验证码
 
         String code = CommonUtil.genRandomStr();
 
