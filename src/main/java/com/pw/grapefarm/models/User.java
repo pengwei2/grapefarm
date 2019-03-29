@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Data
@@ -28,6 +29,7 @@ public class User {
     private String email;
 
     @Transient
+    @Size(min = 6,max = 6)
     @NotBlank(message = "验证码不能为空")
     private String code;
 
