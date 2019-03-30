@@ -24,14 +24,6 @@ public class GrapefarmApplicationTests {
 
     @Test
     public void testUnit() {
-        String email = "yodang2008@163.com";
-        List<EmailCode> list = emailCodeDao.findByEmailOrderBySendTimeDesc(email);
-        System.out.println(list);
-
-        email = "xx@163.com";
-        list = emailCodeDao.findByEmailOrderBySendTimeDesc(email);
-
-        System.out.println(list);
     }
 
     @Test

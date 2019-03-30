@@ -38,13 +38,16 @@ public class ECodeServiceImpl  implements ECodeService{
     @Override
     public Response sendRegisterCode(String email, String sendType) throws MessagingException {
 
-        // 如果该邮件对应的用户已存在，则发送获取验证码失败
+        // 如果该邮箱对应的用户已存在，则发送获取验证码失败
         if(userDao.findByEmail(email) != null){
             return cResponse(StatusCode.email_registered.getCode(), StatusCode.email_registered.getRemark());
         }
 
         // TODO 同一个邮件一分钟内只允许发送一次注册用户验证码
+        return  selfResponse(email,sendType,"registerTemplate");
+    }
 
+    private Response selfResponse(String email,String sendType,String template) throws MessagingException {
         String code = CommonUtil.genRandomStr();
 
         EmailCode emailCode = new EmailCode();
@@ -56,14 +59,21 @@ public class ECodeServiceImpl  implements ECodeService{
 
         Context context = new Context();
         context.setVariable("emailCode", code);
-        String emailContent = templateEngine.process("registerTemplate", context);
+        String emailContent = templateEngine.process(template, context);
         mailService.sendHtmlMail(email,"用户注册码",null,emailContent);
 
         return cResponse(COMMON_SUCCESS_CODE,"成功");
     }
 
     @Override
-    public Response sendForgetCode(String email, String sendType) {
-        return  null;
+    public Response sendForgetCode(String email, String sendType) throws MessagingException {
+
+        // 如果该邮箱对应的用户不存在，则不能发送重置密码邮箱验证码
+        if(userDao.findByEmail(email) == null){
+            return cResponse(StatusCode.user_forget_email_not_exist.getCode(), StatusCode.user_forget_email_not_exist.getRemark());
+        }
+
+        // TODO 同一个邮件一分钟内只允许发送一次重置密码邮箱验证码
+        return  selfResponse(email,sendType,"forgetTemplate");
     }
 }

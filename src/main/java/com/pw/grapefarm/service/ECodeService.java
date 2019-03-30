@@ -10,5 +10,5 @@ public interface ECodeService {
     Response sendRegisterCode(String email, String sendType) throws MessagingException;
 
     @Transactional
-    Response sendForgetCode(String email, String sendType);
+    Response sendForgetCode(String email, String sendType) throws MessagingException;
 }

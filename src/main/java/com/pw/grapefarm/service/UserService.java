@@ -9,4 +9,6 @@ public interface UserService {
     @Transactional
     Response saveUser(User user);
 
+    @Transactional
+    Response updateUserPasswd(User user);
 }

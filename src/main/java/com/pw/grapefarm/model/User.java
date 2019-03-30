@@ -29,7 +29,7 @@ public class User {
     private String email;
 
     @Transient
-    @Size(min = 6,max = 6)
+    @Size(min = 6,max = 6,message = "邮箱验证码的长度为6位")
     @NotBlank(message = "验证码不能为空")
     private String code;
 

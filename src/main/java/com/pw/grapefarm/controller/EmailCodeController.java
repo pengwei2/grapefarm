@@ -2,6 +2,7 @@ package com.pw.grapefarm.controller;
 
 import com.pw.grapefarm.annotation.ParamValid;
 import com.pw.grapefarm.common.Response;
+import com.pw.grapefarm.common.SendType;
 import com.pw.grapefarm.model.EmailCode;
 import com.pw.grapefarm.service.ECodeService;
 import io.swagger.annotations.Api;
@@ -27,8 +28,20 @@ public class EmailCodeController extends BaseController {
     ECodeService eCodeService;
 
     @ApiOperation(value = "验证码发送接口",
-            notes = "sendType=register则是发送用户注册邮箱验证码，而sendType=forget则是发送重置密码邮箱验证码；" +
-                    "\n statusCode=1代表返回成功，statusCode=2代表发生常规错误，statusCode=3代表该邮箱已经注册！")
+            notes = "sendType=register则是发送用户注册邮箱验证码：" +
+                    "\n statusCode=1代表返回成功" +
+                    "\n statusCode=2代表发生常规错误" +
+                    "\n statusCode=3代表该邮箱已经注册" +
+                    "\n statusCode=4代表该邮箱对应的验证码不存在" +
+                    "\n statusCode=5代表验证码不正确" +
+                    "\n----------------------------"+
+                    "\n sendType=forget则是发送密码重置邮箱验证码：" +
+                    "\n statusCode=1代表返回成功" +
+                    "\n statusCode=2代表发生常规错误" +
+                    "\n statusCode=3代表该邮箱对应的用户不存在" +
+                    "\n statusCode=4代表该邮箱对应的验证码不存在" +
+                    "\n statusCode=5代表验证码不正确" +
+                    "\n ")
     @ParamValid
     @PostMapping
     public Response sendEmailCode(@Valid @RequestBody EmailCode input, BindingResult bindingResult) throws MessagingException {

@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface EmailCodeDao extends JpaRepository<EmailCode,Integer> {
-    List<EmailCode> findByEmailOrderBySendTimeDesc(String email);
+    List<EmailCode> findByEmailAndSendTypeOrderBySendTimeDesc(String email,String sendType);
 }
