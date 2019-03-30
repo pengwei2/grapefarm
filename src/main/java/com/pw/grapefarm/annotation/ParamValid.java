@@ -1,4 +1,4 @@
-package com.pw.grapefarm.annotations;
+package com.pw.grapefarm.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

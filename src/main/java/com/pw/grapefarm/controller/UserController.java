@@ -1,11 +1,11 @@
-package com.pw.grapefarm.controllers;
+package com.pw.grapefarm.controller;
 
-import com.pw.grapefarm.annotations.ParamValid;
-import com.pw.grapefarm.commons.Response;
-import com.pw.grapefarm.daos.EmailCodeDao;
-import com.pw.grapefarm.daos.UserDao;
-import com.pw.grapefarm.models.EmailCode;
-import com.pw.grapefarm.models.User;
+import com.pw.grapefarm.annotation.ParamValid;
+import com.pw.grapefarm.common.Response;
+import com.pw.grapefarm.dao.EmailCodeDao;
+import com.pw.grapefarm.dao.UserDao;
+import com.pw.grapefarm.model.EmailCode;
+import com.pw.grapefarm.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;

@@ -1,12 +1,12 @@
-package com.pw.grapefarm.controllers;
+package com.pw.grapefarm.controller;
 
-import com.pw.grapefarm.annotations.ParamValid;
-import com.pw.grapefarm.commons.Response;
-import com.pw.grapefarm.daos.EmailCodeDao;
-import com.pw.grapefarm.daos.UserDao;
-import com.pw.grapefarm.models.EmailCode;
-import com.pw.grapefarm.services.MailService;
-import com.pw.grapefarm.utils.CommonUtil;
+import com.pw.grapefarm.annotation.ParamValid;
+import com.pw.grapefarm.common.Response;
+import com.pw.grapefarm.dao.EmailCodeDao;
+import com.pw.grapefarm.dao.UserDao;
+import com.pw.grapefarm.model.EmailCode;
+import com.pw.grapefarm.service.MailService;
+import com.pw.grapefarm.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;

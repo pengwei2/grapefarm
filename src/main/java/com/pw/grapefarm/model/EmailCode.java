@@ -1,4 +1,4 @@
-package com.pw.grapefarm.models;
+package com.pw.grapefarm.model;
 
 import lombok.Data;
 

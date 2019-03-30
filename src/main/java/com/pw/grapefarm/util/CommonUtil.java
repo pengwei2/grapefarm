@@ -1,4 +1,4 @@
-package com.pw.grapefarm.utils;
+package com.pw.grapefarm.util;
 
 import java.util.Random;
 

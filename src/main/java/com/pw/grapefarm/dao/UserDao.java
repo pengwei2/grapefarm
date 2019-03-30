@@ -1,6 +1,6 @@
-package com.pw.grapefarm.daos;
+package com.pw.grapefarm.dao;
 
-import com.pw.grapefarm.models.User;
+import com.pw.grapefarm.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserDao extends JpaRepository<User,Integer> {

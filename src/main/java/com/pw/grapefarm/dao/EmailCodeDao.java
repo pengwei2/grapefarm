@@ -1,6 +1,6 @@
-package com.pw.grapefarm.daos;
+package com.pw.grapefarm.dao;
 
-import com.pw.grapefarm.models.EmailCode;
+import com.pw.grapefarm.model.EmailCode;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

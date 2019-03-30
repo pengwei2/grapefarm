@@ -1,4 +1,4 @@
-package com.pw.grapefarm.services;
+package com.pw.grapefarm.service;
 
 import javax.mail.MessagingException;
 

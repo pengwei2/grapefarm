@@ -1,6 +1,6 @@
-package com.pw.grapefarm.controllers;
+package com.pw.grapefarm.controller;
 
-import com.pw.grapefarm.commons.Response;
+import com.pw.grapefarm.common.Response;
 
 import java.util.HashMap;
 import java.util.Map;

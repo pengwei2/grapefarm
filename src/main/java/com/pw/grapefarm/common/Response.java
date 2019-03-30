@@ -1,4 +1,4 @@
-package com.pw.grapefarm.commons;
+package com.pw.grapefarm.common;
 
 import lombok.Data;
 

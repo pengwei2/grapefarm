@@ -1,8 +1,8 @@
-package com.pw.grapefarm.aspects;
+package com.pw.grapefarm.aspect;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pw.grapefarm.annotations.ParamValid;
-import com.pw.grapefarm.commons.Response;
+import com.pw.grapefarm.annotation.ParamValid;
+import com.pw.grapefarm.common.Response;
 import lombok.extern.log4j.Log4j2;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
