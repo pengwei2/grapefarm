@@ -18,6 +18,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -33,22 +34,22 @@ public class UserController extends BaseController{
 
     @ParamValid
     @PostMapping
-    public Response<String> createUser(@Valid @RequestBody User user, BindingResult bindingResult){
+    public Response<Map> createUser(@Valid @RequestBody User user, BindingResult bindingResult){
         String email = user.getEmail();
 
         // 如果该邮件对应的用户已存在，则创建用户失败
         if(userDao.findByEmail(email) != null){
-            return new Response<>(StatusCode.fail.ordinal(),"失败","该邮箱对应的用户已存在！");
+            return cResponse(StatusCode.user_email_exist.getCode(),StatusCode.user_email_exist.getRemark());
         }
 
         List<EmailCode> emailCodeList = emailCodeDao.findByEmailOrderBySendTimeDesc(user.getEmail());
         if(emailCodeList.size() == 0){
-            return new Response<>(StatusCode.fail.ordinal(),"失败","该邮箱对应的验证码不存在！");
+            return cResponse(StatusCode.user_code_not_exist.getCode(),StatusCode.user_code_not_exist.getRemark());
         }
 
         String lastestCode = emailCodeList.get(0).getCode();
         if(!lastestCode.toLowerCase().equals(user.getCode().toLowerCase())){
-            return new Response<>(StatusCode.fail.ordinal(),"失败","验证码不正确");
+            return cResponse(StatusCode.user_code_incorrect.getCode(),StatusCode.user_code_incorrect.getRemark());
         }
 
         // TODO 将业务代码移至service层去
@@ -61,7 +62,7 @@ public class UserController extends BaseController{
         user.setUpdateTime(new Date());
         userDao.save(user);
 
-        return new Response<>(StatusCode.success.ordinal(),"成功","");
+        return cResponse(COMMON_SUCCESS_CODE,"成功");
     }
 
 }

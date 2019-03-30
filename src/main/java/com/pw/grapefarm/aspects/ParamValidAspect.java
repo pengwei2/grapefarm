@@ -21,17 +21,17 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Aspect
 @Log4j2
 @Component
 public class ParamValidAspect {
 
-    public enum StatusCode{
-        success,fail
-    }
-
+    // 常规错误码
+    private static final int COMMON_ERROR_CODE = 2;
 
     @Autowired
     ObjectMapper objectMapper;
@@ -43,7 +43,7 @@ public class ParamValidAspect {
         if (paramObj.length > 0) {
             if (paramObj[1] instanceof BindingResult) {
                 BindingResult result = (BindingResult) paramObj[1];
-                Response<List> errorMap = this.validRequestParams(result);
+                Response<Map> errorMap = this.validRequestParams(result);
 
                 if (errorMap != null) {
                     ServletRequestAttributes res = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -77,14 +77,17 @@ public class ParamValidAspect {
     /**
      * 校验
      */
-    private Response<List> validRequestParams(BindingResult result) {
+    private Response<Map> validRequestParams(BindingResult result) {
         if (result.hasErrors()) {
             List<ObjectError> allErrors = result.getAllErrors();
             List<String> lists = new ArrayList<>();
             for (ObjectError objectError : allErrors) {
                 lists.add(objectError.getDefaultMessage());
             }
-            return new Response<>(StatusCode.fail.ordinal(), "something is wrong", lists);
+
+            Map<String,List> map = new HashMap<>();
+            map.put("list",lists);
+            return new Response<>(COMMON_ERROR_CODE, "something is wrong", map);
         }
         return null;
     }
