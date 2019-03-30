@@ -4,6 +4,8 @@ import com.pw.grapefarm.annotation.ParamValid;
 import com.pw.grapefarm.common.Response;
 import com.pw.grapefarm.model.EmailCode;
 import com.pw.grapefarm.service.ECodeService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,7 @@ import javax.validation.Valid;
 
 import static com.pw.grapefarm.common.Response.*;
 
+@Api(value = "邮箱验证码controller",tags = {"邮箱验证码操作接口"})
 @RestController
 @RequestMapping(value = "/emailcode")
 public class EmailCodeController extends BaseController {
@@ -23,6 +26,9 @@ public class EmailCodeController extends BaseController {
     @Autowired
     ECodeService eCodeService;
 
+    @ApiOperation(value = "验证码发送接口",
+            notes = "sendType=register则是发送用户注册邮箱验证码，而sendType=forget则是发送重置密码邮箱验证码；" +
+                    "\n statusCode=1代表返回成功，statusCode=2代表发生常规错误，statusCode=3代表该邮箱已经注册！")
     @ParamValid
     @PostMapping
     public Response sendEmailCode(@Valid @RequestBody EmailCode input, BindingResult bindingResult) throws MessagingException {
