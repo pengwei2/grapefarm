@@ -27,6 +27,7 @@ public class EmailCode {
      * register 注册账号
      * forget   忘记密码
      */
+    @NotBlank(message = "验证码类型不能为空")
     @Column(name = "send_type",nullable = false)
     private String sendType;
 
