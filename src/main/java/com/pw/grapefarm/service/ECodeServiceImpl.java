@@ -43,7 +43,7 @@ public class ECodeServiceImpl  implements ECodeService{
             return cResponse(StatusCode.email_registered.getCode(), StatusCode.email_registered.getRemark());
         }
 
-        // TODO 同一个邮件一分钟内只允许发送一次注册用户验证码
+        // TODO 同一个邮件一分钟内只允许发送一次注册用户验证码,防止被攻击
         return  selfResponse(email,sendType,"registerTemplate");
     }
 
@@ -70,10 +70,10 @@ public class ECodeServiceImpl  implements ECodeService{
 
         // 如果该邮箱对应的用户不存在，则不能发送重置密码邮箱验证码
         if(userDao.findByEmail(email) == null){
-            return cResponse(StatusCode.user_forget_email_not_exist.getCode(), StatusCode.user_forget_email_not_exist.getRemark());
+            return cResponse(StatusCode.email_forget_not_exist.getCode(), StatusCode.email_forget_not_exist.getRemark());
         }
 
-        // TODO 同一个邮件一分钟内只允许发送一次重置密码邮箱验证码
+        // TODO 同一个邮件一分钟内只允许发送一次重置密码邮箱验证码,防止被攻击
         return  selfResponse(email,sendType,"forgetTemplate");
     }
 }

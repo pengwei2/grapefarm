@@ -32,15 +32,11 @@ public class EmailCodeController extends BaseController {
                     "\n statusCode=1代表返回成功" +
                     "\n statusCode=2代表发生常规错误" +
                     "\n statusCode=3代表该邮箱已经注册" +
-                    "\n statusCode=4代表该邮箱对应的验证码不存在" +
-                    "\n statusCode=5代表验证码不正确" +
                     "\n----------------------------"+
                     "\n sendType=forget则是发送密码重置邮箱验证码：" +
                     "\n statusCode=1代表返回成功" +
                     "\n statusCode=2代表发生常规错误" +
                     "\n statusCode=3代表该邮箱对应的用户不存在" +
-                    "\n statusCode=4代表该邮箱对应的验证码不存在" +
-                    "\n statusCode=5代表验证码不正确" +
                     "\n ")
     @ParamValid
     @PostMapping

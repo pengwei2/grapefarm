@@ -7,8 +7,8 @@ import com.pw.grapefarm.dao.EmailCodeDao;
 import com.pw.grapefarm.dao.UserDao;
 import com.pw.grapefarm.model.EmailCode;
 import com.pw.grapefarm.model.User;
+import com.pw.grapefarm.util.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,9 +24,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     EmailCodeDao emailCodeDao;
-
-    @Resource
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public Response saveUser(User user) {
@@ -51,7 +48,7 @@ public class UserServiceImpl implements UserService {
         user.setId(null);
         user.setUserName("");
         user.setFarmName("");
-        user.setPassword(bCryptPasswordEncoder.encode(password));
+        user.setPassword(PasswordUtil.encode(password));
         user.setCreateTime(new Date());
         user.setUpdateTime(new Date());
         userDao.save(user);
@@ -79,7 +76,7 @@ public class UserServiceImpl implements UserService {
             return cResponse(StatusCode.user_forget_code_incorrect.getCode(), StatusCode.user_forget_code_incorrect.getRemark());
         }
 
-        tUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        tUser.setPassword(PasswordUtil.encode(user.getPassword()));
 
         return cResponse(COMMON_SUCCESS_CODE, "成功");
     }
