@@ -18,7 +18,12 @@ public enum StatusCode {
     // user_forget
     user_forget_email_not_exist(3, "该邮箱对应的用户不存在！"),
     user_forget_code_not_exist(4, "该邮箱对应的验证码不存在！"),
-    user_forget_code_incorrect(5, "验证码不正确！");
+    user_forget_code_incorrect(5, "验证码不正确！"),
+
+    // auth
+    auth_login_success(1,"验证通过！"),
+    auth_login_failure(2,"验证失败：账号或密码错误！"),
+    auth_no_right(3,"无权限！");
 
     private int code;
     private String remark;

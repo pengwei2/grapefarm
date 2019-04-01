@@ -1,4 +1,4 @@
-package com.pw.grapefarm.util;
+package com.pw.grapefarm.common.util;
 
 import lombok.NonNull;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

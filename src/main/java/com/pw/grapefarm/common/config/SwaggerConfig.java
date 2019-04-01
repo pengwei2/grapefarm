@@ -1,4 +1,4 @@
-package com.pw.grapefarm.config;
+package com.pw.grapefarm.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

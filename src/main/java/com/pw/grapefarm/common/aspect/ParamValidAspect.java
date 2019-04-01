@@ -1,13 +1,12 @@
-package com.pw.grapefarm.aspect;
+package com.pw.grapefarm.common.aspect;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pw.grapefarm.annotation.ParamValid;
+import com.pw.grapefarm.common.annotation.ParamValid;
 import com.pw.grapefarm.common.Response;
+import com.pw.grapefarm.common.util.JsonUtil;
 import lombok.extern.log4j.Log4j2;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -33,8 +32,6 @@ public class ParamValidAspect {
     // 常规错误码
     private static final int COMMON_ERROR_CODE = 2;
 
-    @Autowired
-    ObjectMapper objectMapper;
 
     @Before("@annotation(paramValid)")
     public void paramValid(JoinPoint point, ParamValid paramValid) {
@@ -55,7 +52,7 @@ public class ParamValidAspect {
                     OutputStream output = null;
                     try {
                         output = response.getOutputStream();
-                        String error = objectMapper.writeValueAsString(errorMap);
+                        String error = JsonUtil.toJson(errorMap);
                         log.info("aop 检测到参数不规范" + error);
                         output.write(error.getBytes(StandardCharsets.UTF_8));
                     } catch (IOException e) {

@@ -33,6 +33,9 @@ public class User {
     @NotBlank(message = "验证码不能为空")
     private String code;
 
+    @Column
+    private String role;
+
     @Column(name = "create_time")
     private Date createTime;
 

@@ -1,6 +1,6 @@
 package com.pw.grapefarm.controller;
 
-import com.pw.grapefarm.annotation.ParamValid;
+import com.pw.grapefarm.common.annotation.ParamValid;
 import com.pw.grapefarm.common.Response;
 import com.pw.grapefarm.common.SendType;
 import com.pw.grapefarm.model.EmailCode;

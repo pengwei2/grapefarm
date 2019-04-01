@@ -7,11 +7,10 @@ import com.pw.grapefarm.dao.EmailCodeDao;
 import com.pw.grapefarm.dao.UserDao;
 import com.pw.grapefarm.model.EmailCode;
 import com.pw.grapefarm.model.User;
-import com.pw.grapefarm.util.PasswordUtil;
+import com.pw.grapefarm.common.util.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 

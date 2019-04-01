@@ -5,7 +5,7 @@ import com.pw.grapefarm.common.StatusCode;
 import com.pw.grapefarm.dao.EmailCodeDao;
 import com.pw.grapefarm.dao.UserDao;
 import com.pw.grapefarm.model.EmailCode;
-import com.pw.grapefarm.util.CommonUtil;
+import com.pw.grapefarm.common.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
