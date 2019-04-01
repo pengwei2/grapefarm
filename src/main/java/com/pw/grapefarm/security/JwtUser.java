@@ -8,9 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
-/**
- * Created by echisan on 2018/6/23
- */
 public class JwtUser implements UserDetails {
 
     private Integer id;
