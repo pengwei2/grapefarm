@@ -3,6 +3,7 @@ package com.pw.grapefarm.service;
 import com.pw.grapefarm.common.Response;
 import com.pw.grapefarm.common.SendType;
 import com.pw.grapefarm.common.StatusCode;
+import com.pw.grapefarm.common.util.JsonUtil;
 import com.pw.grapefarm.dao.EmailCodeDao;
 import com.pw.grapefarm.dao.UserDao;
 import com.pw.grapefarm.model.EmailCode;
@@ -76,6 +77,8 @@ public class UserServiceImpl implements UserService {
         }
 
         tUser.setPassword(PasswordUtil.encode(user.getPassword()));
+        tUser.setCode(user.getCode());
+
         userDao.save(tUser);
 
         return cResponse(COMMON_SUCCESS_CODE, "成功");
