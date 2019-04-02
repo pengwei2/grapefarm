@@ -83,9 +83,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.setContentType("application/json; charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
 
-        response.setHeader("token", JwtTokenUtils.TOKEN_PREFIX + token);
         Map<String,String> tokenMap = new HashMap<>();
-        tokenMap.put("token",JwtTokenUtils.TOKEN_PREFIX + token);
+        tokenMap.put("token",token);
         Response<Map> tResponse = new Response(auth_login_success.getCode(),auth_login_success.getRemark(),tokenMap);
         response.getWriter().write(JsonUtil.toJson(tResponse));
     }

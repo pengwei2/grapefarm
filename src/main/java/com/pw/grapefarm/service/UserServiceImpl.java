@@ -51,6 +51,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(PasswordUtil.encode(password));
         user.setCreateTime(new Date());
         user.setUpdateTime(new Date());
+        user.setRole("API");
         userDao.save(user);
 
         return cResponse(COMMON_SUCCESS_CODE, "成功");
