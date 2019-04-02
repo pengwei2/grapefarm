@@ -76,6 +76,7 @@ public class UserServiceImpl implements UserService {
         }
 
         tUser.setPassword(PasswordUtil.encode(user.getPassword()));
+        userDao.save(tUser);
 
         return cResponse(COMMON_SUCCESS_CODE, "成功");
     }
