@@ -17,7 +17,7 @@ import java.util.Date;
 @Api(value = "提交记录controller", tags = {"用户提交记录操作接口"})
 @RestController
 @RequestMapping(value = "/record")
-public class RecordController extends BaseController{
+public class RecordController extends BaseController {
 
     @Autowired
     RecordService recordService;
@@ -33,7 +33,9 @@ public class RecordController extends BaseController{
 
     @ApiOperation(value = "获取用户提交记录", notes = "访问该接口需要通过认证")
     @GetMapping
-    public Response getRecord(HttpServletRequest request) {
-        return  recordService.getRecords(getUserName(request));
+    public Response getRecord(HttpServletRequest request,
+                              @RequestParam(value = "page", defaultValue = "0") Integer page,
+                              @RequestParam(value = "size", defaultValue = "5") Integer size) {
+        return recordService.getRecords(page, size, getUserName(request));
     }
 }

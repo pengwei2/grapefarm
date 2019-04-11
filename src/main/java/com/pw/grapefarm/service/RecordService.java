@@ -10,5 +10,5 @@ public interface RecordService {
     Response saveRecord(Record record);
 
     @Transactional
-    Response getRecords(String username);
+    Response getRecords(Integer page,Integer size,String username);
 }
