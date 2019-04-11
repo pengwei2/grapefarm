@@ -3,6 +3,7 @@ package com.pw.grapefarm.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
@@ -16,10 +17,10 @@ public class Record {
     @Column(name = "user_name")
     private String username;
 
-    @Column(name = "farm_name")
+    @Column(name = "farm_name",nullable = false)
     private String farmName;
 
-    @Column(name = "grape_name")
+    @Column(name = "grape_name",nullable = false)
     private String grapeName;
 
     @Column
@@ -30,4 +31,7 @@ public class Record {
 
     @Column(length = 4000)
     private String modelData;
+
+    @Column(name = "create_time")
+    private Date createTime;
 }

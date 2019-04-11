@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Date;
 
 @Api(value = "提交记录controller", tags = {"用户提交记录操作接口"})
 @RestController
@@ -25,6 +26,7 @@ public class RecordController extends BaseController{
     @PostMapping
     public Response saveRecord(@Valid @RequestBody Record record, BindingResult bindingResult, HttpServletRequest request) {
         record.setUsername(getUserName(request));
+        record.setCreateTime(new Date());
         return recordService.saveRecord(record);
     }
 

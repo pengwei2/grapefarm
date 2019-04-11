@@ -2,6 +2,9 @@
 spring:
   profiles:
     active: pre
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
   mail:
     host: smtp.qq.com
     username: 825619590@qq.com
