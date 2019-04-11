@@ -22,7 +22,7 @@ public class RecordServiceImpl implements RecordService {
 
     @Override
     public Response getRecords(String username) {
-        return new Response(COMMON_SUCCESS_CODE, "成功",recordDao.getByUsername(username));
+        return new Response(COMMON_SUCCESS_CODE, "成功",recordDao.getByUsernameOrderByCreateTimeDesc(username));
     }
 
 
