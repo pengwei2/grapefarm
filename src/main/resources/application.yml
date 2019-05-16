@@ -25,3 +25,9 @@ mail:
   fromMail:
     addr: flame.chn.company@gmail.com
 
+swagger:
+  base-package: com.pw.grapefarm
+  authorization:
+    key-name: Authorization
+
+
