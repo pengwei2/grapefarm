@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import static com.pw.grapefarm.common.Response.COMMON_SUCCESS_CODE;
 
 @Api(value = "品种controller")
@@ -22,6 +26,8 @@ public class BreedController {
     @ApiOperation(value = "获取农场列表")
     @GetMapping
     public Response getBreed() {
-        return new Response(COMMON_SUCCESS_CODE, "成功", breedDao.findAll());
+        Map<String, List> map = new HashMap<>();
+        map.put("breeds",breedDao.findAll());
+        return new Response(COMMON_SUCCESS_CODE, "成功", map);
     }
 }
