@@ -1,0 +1,40 @@
+server:
+  port: 8010
+
+spring:
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+  datasource:
+    url: jdbc:mysql://192.168.137.130:3306/grapefarm?characterEncoding=utf8&serverTimezone=CTT
+    username: root
+    password: password
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 3000
+      max-lifetime: 1800000
+  mail:
+    host: smtp.gmail.com
+    username: flame.chn.company@gmail.com
+    password: flame123!@#
+    protocol: smtp
+    properties.mail.smtp.auth: true
+    properties.mail.smtp.port: 465
+    properties.mail.display.sendmail: Javen
+    properties.mail.display.sendname: Spring Boot Guide Email
+    properties.mail.smtp.starttls.enable: true
+    properties.mail.smtp.starttls.required: true
+    properties.mail.smtp.ssl.enable: true
+    from: flame.chn.company@gmail.com
+    default-encoding: utf-8
+
+mail:
+  fromMail:
+    addr: flame.chn.company@gmail.com

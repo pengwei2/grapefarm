@@ -5,25 +5,7 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
-  mail:
-    host: smtp.gmail.com
-    username: flame.chn.company@gmail.com
-    password: flame123!@#
-    protocol: smtp
-    properties.mail.smtp.auth: true
-    properties.mail.smtp.port: 465
-    properties.mail.display.sendmail: Javen
-    properties.mail.display.sendname: Spring Boot Guide Email
-    properties.mail.smtp.starttls.enable: true
-    properties.mail.smtp.starttls.required: true
-    properties.mail.smtp.ssl.enable: true
-    from: flame.chn.company@gmail.com
-    default-encoding: utf-8
 
-
-mail:
-  fromMail:
-    addr: flame.chn.company@gmail.com
 
 swagger:
   base-package: com.pw.grapefarm
