@@ -10,9 +10,9 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
   datasource:
-    url: jdbc:mysql://47.101.51.112:3306/grapefarm?characterEncoding=utf8&serverTimezone=CTT
+    url: jdbc:mysql://127.0.0.1:3306/grapefarm?characterEncoding=utf8&serverTimezone=CTT
     username: root
-    password: password
+    password: 5pzzZVwzhTh5
     driver-class-name: com.mysql.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
