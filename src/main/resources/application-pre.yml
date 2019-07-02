@@ -26,12 +26,15 @@ spring:
     password: flame123!@#
     protocol: smtp
     properties.mail.smtp.auth: true
-    properties.mail.smtp.port: 465
+    properties.mail.smtp.port: 587
     properties.mail.display.sendmail: Javen
     properties.mail.display.sendname: Spring Boot Guide Email
     properties.mail.smtp.starttls.enable: true
     properties.mail.smtp.starttls.required: true
     properties.mail.smtp.ssl.enable: true
+    properties.mail.smtp.connectiontimeout: 5000
+    properties.mail.smtp.timeout: 5000
+    properties.mail.smtp.writetimeout: 5000
     from: flame.chn.company@gmail.com
     default-encoding: utf-8
 
