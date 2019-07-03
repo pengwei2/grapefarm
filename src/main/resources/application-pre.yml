@@ -23,7 +23,7 @@ spring:
   mail:
     host: smtp.gmail.com
     username: yodang2008@gmail.com
-    password: pengwei19880804
+    password: xhdomungfmxksjoi
     protocol: smtp
     properties.mail.smtp.auth: true
     properties.mail.smtp.port: 465
