@@ -10,7 +10,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/grapefarm?characterEncoding=utf8&serverTimezone=CTT
+    url: jdbc:mysql://47.244.63.39:3306/grapefarm?characterEncoding=utf8&serverTimezone=CTT
     username: root
     password: 5pzzZVwzhTh5
     driver-class-name: com.mysql.jdbc.Driver
@@ -22,8 +22,8 @@ spring:
       max-lifetime: 1800000
   mail:
     host: smtp.gmail.com
-    username: flame.chn.company@gmail.com
-    password: flame123!@#
+    username: yodang2008@gmail.com
+    password: pengwei19880804
     protocol: smtp
     properties.mail.smtp.auth: true
     properties.mail.smtp.port: 465
