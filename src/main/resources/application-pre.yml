@@ -22,8 +22,8 @@ spring:
       max-lifetime: 1800000
   mail:
     host: smtp.gmail.com
-    username: yodang2008@gmail.com
-    password: xhdomungfmxksjoi
+    username: flame.chn.company@gmail.com
+    password: bljeyqbsefqueivh
     protocol: smtp
     properties.mail.smtp.auth: true
     properties.mail.smtp.port: 465
