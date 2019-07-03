@@ -26,7 +26,7 @@ spring:
     password: flame123!@#
     protocol: smtp
     properties.mail.smtp.auth: true
-    properties.mail.smtp.port: 587
+    properties.mail.smtp.port: 465
     properties.mail.display.sendmail: Javen
     properties.mail.display.sendname: Spring Boot Guide Email
     properties.mail.smtp.starttls.enable: true
