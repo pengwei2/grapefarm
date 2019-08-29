@@ -44,10 +44,10 @@ public class ECodeServiceImpl  implements ECodeService{
         }
 
         // TODO 同一个邮件一分钟内只允许发送一次注册用户验证码,防止被攻击
-        return  selfResponse(email,sendType,"registerTemplate");
+        return  selfResponse(email,"Register number for 3D bunch app",sendType,"registerTemplate");
     }
 
-    private Response selfResponse(String email,String sendType,String template) throws MessagingException {
+    private Response selfResponse(String email,String title,String sendType,String template) throws MessagingException {
         String code = CommonUtil.genRandomStr();
 
         EmailCode emailCode = new EmailCode();
@@ -74,6 +74,6 @@ public class ECodeServiceImpl  implements ECodeService{
         }
 
         // TODO 同一个邮件一分钟内只允许发送一次重置密码邮箱验证码,防止被攻击
-        return  selfResponse(email,sendType,"forgetTemplate");
+        return  selfResponse(email,"Reset number for 3D bunch app",sendType,"forgetTemplate");
     }
 }
