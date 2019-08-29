@@ -60,7 +60,7 @@ public class ECodeServiceImpl  implements ECodeService{
         Context context = new Context();
         context.setVariable("emailCode", code);
         String emailContent = templateEngine.process(template, context);
-        mailService.sendHtmlMail(email,"用户注册码",null,emailContent);
+        mailService.sendHtmlMail(email,title,null,emailContent);
 
         return cResponse(COMMON_SUCCESS_CODE,"成功");
     }
