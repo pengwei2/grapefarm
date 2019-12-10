@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>ToPay</title>
+    <script type="text/javascript" src="js/pay.js"></script>
+</head>
+<body>
+
+<script>
+    window.onload= function () {
+        var bankForm = document.createElement("form");
+        bankForm.action = "/pay";//支付中心地址
+        bankForm.id = "IDataForm";
+        bankForm.method = "post";
+        bankForm.target = "_self";
+        var input = document.createElement("input");
+        input.id = "amount";
+        input.name = "amount";
+        input.type = "hidden";
+
+        var url = location.search; //获取url中"?"符后的字串
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                theRequest[strs[i].split("=")[0]] = decodeURI(strs[i].split("=")[1]);
+            }
+        }
+        var amount = theRequest['amount'];
+
+        input.value = amount;
+        bankForm.appendChild(input);
+        document.body.appendChild(bankForm);
+        var submitAction = document.getElementById("IDataForm");
+        submitAction.submit();
+        //document.body.removeChild(submitAction);
+    }
+
+</script>
+<!--<form method="post" th:action="@{/pay}">-->
+    <!--<input id="amount" name="amount" type="hidden" value="1000"/>-->
+    <!--<button type="submit"><img src="images/pp258.png" width="100px;" height="100px;"/></button>-->
+<!--</form>-->
+</body>
+</html>

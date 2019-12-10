@@ -2,6 +2,8 @@ server:
   port: 8000
 
 spring:
+  thymeleaf:
+    cache: false
   jpa:
     show-sql: false
     hibernate:
@@ -13,7 +15,7 @@ spring:
     url: jdbc:mysql://47.244.63.39:3306/grapefarm?characterEncoding=utf8&serverTimezone=CTT
     username: root
     password: 5pzzZVwzhTh5
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       minimum-idle: 5
@@ -41,3 +43,9 @@ spring:
 mail:
   fromMail:
     addr: flame.chn.company@gmail.com
+
+paypal:
+  mode: sandbox
+  client:
+      app: ARui9JpREdR7Nu7fFYBmdgAh4RMMaBaa_NXQp4B6DjtqsfZCqG2aIj4spqAcNTjTjP8jaKxMt19XNakR
+      secret: ENCubpYF2jVkj5mFemTdCgXBnI7NeOFyphgb6s2sPdAOWpGIinoqqHsD8ghKrm8R2g9QnjW5gCfF6INR
