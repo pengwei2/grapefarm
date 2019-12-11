@@ -13,3 +13,11 @@ swagger:
     key-name: Authorization
 
 
+# 以root账号登录阿里云
+# 进入 cd project/grapefarm
+# 执行： git pull
+# mvn package -Dmaven.test.skip=true
+# 从 project/grapefarm/target中把jar包拷贝到根目录的jar目录中
+# 在jar 目录执行：nohup java -jar grapefarm-0.0.1-SNAPSHOT.jar -Dspring.profiles.active=prd &
+#
+
