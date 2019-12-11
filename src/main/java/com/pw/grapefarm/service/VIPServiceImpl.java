@@ -36,10 +36,10 @@ public class VIPServiceImpl implements VIPService {
         return new Response(COMMON_SUCCESS_CODE, "成功",vipUser);
     }
 
-    private Date toDateByType(Date date, int field) {
+    private Date toDateByType(Date date, int field, int amount) {
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(date);
-        calendar.add(field,1);
+        calendar.add(field,amount);
         return calendar.getTime();
     }
 
@@ -49,10 +49,10 @@ public class VIPServiceImpl implements VIPService {
         Integer type = user.getType();
         if (type == 1) {
             // 年卡
-            endData = toDateByType(startData,Calendar.YEAR);
+            endData = toDateByType(startData,Calendar.YEAR,1);
         } else if (type == 2) {
-            // 月卡
-            endData = toDateByType(startData,Calendar.MONTH);
+            // 季卡
+            endData = toDateByType(startData,Calendar.MONTH,3);
         }
 
         user.setStartDate(startData);
@@ -69,10 +69,10 @@ public class VIPServiceImpl implements VIPService {
         Date endData = new Date();
         if (type == 1) {
             // 年卡
-            endData = toDateByType(user.getEndDate(),Calendar.YEAR);
+            endData = toDateByType(user.getEndDate(),Calendar.YEAR,1);
         } else if (type == 2) {
-            // 月卡
-            endData = toDateByType(user.getEndDate(),Calendar.MONTH);
+            // 季卡
+            endData = toDateByType(user.getEndDate(),Calendar.MONTH,3);
         }
 
         user.setEndDate(endData);
