@@ -10,7 +10,6 @@ import java.util.Date;
 @Entity
 @Table(name = "t_vip_record")
 public class VipRecord {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -27,9 +26,6 @@ public class VipRecord {
 
     @Column(name = "amount")
     private String amount;
-
-    @Column(name = "serial")
-    private String serial;
 
     // 支付流水号
     @Column(name = "transaction_id")

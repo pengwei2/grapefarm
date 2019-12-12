@@ -1,7 +1,7 @@
 package com.pw.grapefarm.controller;
 
 
-import com.paypal.api.payments.Currency;
+import com.google.common.collect.Maps;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
@@ -20,10 +20,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.Map;
 import java.util.Random;
 
 @Controller
@@ -32,6 +32,8 @@ public class PaymentController extends BaseController {
     public static final String PAYPAL_SUCCESS_URL = "/pay/success";
     public static final String PAYPAL_CANCEL_URL = "/cancel";
 
+
+    private static final Map<String, String> DATABASES = Maps.newConcurrentMap();
     private Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
@@ -63,12 +65,16 @@ public class PaymentController extends BaseController {
     // 通过h5的form提交的post方式调用接口
     @RequestMapping(method = RequestMethod.POST)
     public String pay(HttpServletRequest request,
-                      @RequestParam("amount") Double amount){
+                      @RequestParam("amount") Double amount,
+                      @RequestParam("username") String username,
+                      @RequestParam("type") int type){
+
+        DATABASES.put("username",username);
+        DATABASES.put("type",String.format("%d", type));
+
         String cancelUrl = URLUtils.getBaseURl(request)  + PAYPAL_CANCEL_URL;
         String successUrl = URLUtils.getBaseURl(request) + PAYPAL_SUCCESS_URL;
-
         String order_desc = amount + "_" + getRandomString(10);
-
         try {
             Payment payment = paypalService.createPayment(
                     amount,
@@ -96,16 +102,12 @@ public class PaymentController extends BaseController {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/successto")
-    public String successTo(@RequestParam("amount") String paymentId,
-                             @RequestParam("serial") String payerId){
-
+    public String successTo(@RequestParam("amount") String paymentId, @RequestParam("serial") String payerId){
         return "successfully";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/success")
-    public String successPay(HttpServletRequest request,
-                             @RequestParam("paymentId") String paymentId,
-                             @RequestParam("PayerID") String payerId){
+    public String successPay(@RequestParam("paymentId") String paymentId,@RequestParam("PayerID") String payerId){
         try {
             Payment payment = paypalService.executePayment(paymentId, payerId);
             if(payment.getState().equals("approved")){
@@ -116,8 +118,7 @@ public class PaymentController extends BaseController {
                 String transationId = payment.getTransactions().get(0).getRelatedResources().get(0).getSale().getId();
                 String payInfo = "?amount=" + total + "&serial=" + transationId;
 
-
-                String email = getUserName(request);
+                String email = DATABASES.get("username");
                 // 保存交易记录
                 VipRecord vipRecord = new VipRecord();
                 vipRecord.setVipDate(new Date());
@@ -132,10 +133,11 @@ public class PaymentController extends BaseController {
                 VipUser vipUser = new VipUser();
                 vipUser.setEmail(email);
                 vipUser.setTransactionId(transationId);
-                if (total.startsWith("199")) {
+                String type = DATABASES.get("type");
+                if (type.equalsIgnoreCase("1")) {
                     // 年卡
                     vipUser.setType(1);
-                } else if (total.startsWith("89")) {
+                } else if (type.equalsIgnoreCase("2")) {
                     vipUser.setType(2);
                 }
 

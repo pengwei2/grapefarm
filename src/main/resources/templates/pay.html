@@ -32,6 +32,27 @@
 
         input.value = amount;
         bankForm.appendChild(input);
+
+        var inputUersname = document.createElement("input");
+        inputUersname.id = "username";
+        inputUersname.name = "username";
+        inputUersname.type = "hidden";
+        var username = theRequest['username'];
+
+        inputUersname.value = username;
+        bankForm.appendChild(inputUersname);
+
+
+        var inputType = document.createElement("input");
+        inputType.id = "type";
+        inputType.name = "type";
+        inputType.type = "hidden";
+        var type = theRequest['type'];
+
+        inputType.value = type;
+        bankForm.appendChild(inputType);
+
+
         document.body.appendChild(bankForm);
         var submitAction = document.getElementById("IDataForm");
         submitAction.submit();

@@ -69,14 +69,19 @@ public class VIPServiceImpl implements VIPService {
         Date endData = new Date();
         if (type == 1) {
             // 年卡
-            endData = toDateByType(user.getEndDate(),Calendar.YEAR,1);
+            endData = toDateByType(vipUser.getEndDate(),Calendar.YEAR,1);
         } else if (type == 2) {
             // 季卡
-            endData = toDateByType(user.getEndDate(),Calendar.MONTH,3);
+            endData = toDateByType(vipUser.getEndDate(),Calendar.MONTH,3);
         }
 
         user.setEndDate(endData);
-        vipUserDao.save(user);
+        if(vipUser.getStartDate() != null) {
+            user.setStartDate(vipUser.getStartDate());
+        }
+
+
+        vipUserDao.modifyByEmail(user.getEndDate(),user.getStartDate(),user.getTransactionId(),user.getType(),user.getEmail());
         return cResponse(COMMON_SUCCESS_CODE, "成功");
     }
 }
