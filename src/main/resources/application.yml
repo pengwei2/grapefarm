@@ -1,7 +1,7 @@
 # 指定哪个配置文件生效
 spring:
   profiles:
-    active: prd
+    active: pre
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8

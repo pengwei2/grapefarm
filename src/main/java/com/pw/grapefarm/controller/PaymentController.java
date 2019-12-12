@@ -8,7 +8,11 @@ import com.paypal.base.rest.PayPalRESTException;
 import com.pw.grapefarm.common.util.URLUtils;
 import com.pw.grapefarm.config.PaypalPaymentIntent;
 import com.pw.grapefarm.config.PaypalPaymentMethod;
+import com.pw.grapefarm.model.VipRecord;
+import com.pw.grapefarm.model.VipUser;
 import com.pw.grapefarm.service.PaypalService;
+import com.pw.grapefarm.service.VIPRecordService;
+import com.pw.grapefarm.service.VIPService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +23,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.Random;
 
 @Controller
 @RequestMapping("/pay")
-public class PaymentController {
+public class PaymentController extends BaseController {
     public static final String PAYPAL_SUCCESS_URL = "/pay/success";
     public static final String PAYPAL_CANCEL_URL = "/cancel";
 
@@ -31,6 +36,12 @@ public class PaymentController {
 
     @Autowired
     private PaypalService paypalService;
+
+    @Autowired
+    private VIPService vipService;
+
+    @Autowired
+    private VIPRecordService vipRecordService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String index(){
@@ -51,7 +62,8 @@ public class PaymentController {
 
     // 通过h5的form提交的post方式调用接口
     @RequestMapping(method = RequestMethod.POST)
-    public String pay(HttpServletRequest request,@RequestParam("amount") Double amount){
+    public String pay(HttpServletRequest request,
+                      @RequestParam("amount") Double amount){
         String cancelUrl = URLUtils.getBaseURl(request)  + PAYPAL_CANCEL_URL;
         String successUrl = URLUtils.getBaseURl(request) + PAYPAL_SUCCESS_URL;
 
@@ -91,7 +103,8 @@ public class PaymentController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/success")
-    public String successPay(@RequestParam("paymentId") String paymentId,
+    public String successPay(HttpServletRequest request,
+                             @RequestParam("paymentId") String paymentId,
                              @RequestParam("PayerID") String payerId){
         try {
             Payment payment = paypalService.executePayment(paymentId, payerId);
@@ -102,6 +115,31 @@ public class PaymentController {
                 // 交易号
                 String transationId = payment.getTransactions().get(0).getRelatedResources().get(0).getSale().getId();
                 String payInfo = "?amount=" + total + "&serial=" + transationId;
+
+
+                String email = getUserName(request);
+                // 保存交易记录
+                VipRecord vipRecord = new VipRecord();
+                vipRecord.setVipDate(new Date());
+                vipRecord.setEmail(email);
+                vipRecord.setAmount(total);
+                vipRecord.setPayerId(payerId);
+                vipRecord.setPaymentId(paymentId);
+                vipRecord.setTransactionId(transationId);
+                vipRecordService.saveRecord(vipRecord);
+
+                // 保存vip用户数据
+                VipUser vipUser = new VipUser();
+                vipUser.setEmail(email);
+                vipUser.setTransactionId(transationId);
+                if (total.startsWith("199")) {
+                    // 年卡
+                    vipUser.setType(1);
+                } else if (total.startsWith("89")) {
+                    vipUser.setType(2);
+                }
+
+                vipService.saveVipUser(vipUser);
 
                 return "redirect:" + "successto" + payInfo;
             }

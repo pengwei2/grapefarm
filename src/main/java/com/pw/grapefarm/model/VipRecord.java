@@ -33,8 +33,9 @@ public class VipRecord {
 
     // 支付流水号
     @Column(name = "transaction_id")
-    private Integer transactionId;
+    private String transactionId;
 
     @Column(name = "vip_date")
+    @Temporal(TemporalType.DATE)
     private Date vipDate;
 }
