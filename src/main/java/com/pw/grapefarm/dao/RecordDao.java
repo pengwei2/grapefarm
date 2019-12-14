@@ -7,4 +7,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import java.util.List;
 
 public interface RecordDao extends JpaRepository<Record,Integer>, JpaSpecificationExecutor<Record> {
+    List<Record> findByUsername(String username);
 }
