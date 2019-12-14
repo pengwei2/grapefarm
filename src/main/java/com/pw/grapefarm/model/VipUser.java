@@ -20,10 +20,12 @@ public class VipUser {
 
     // vip结束日期
     @Column(name = "end_date")
+    @Temporal(TemporalType.DATE)
     private Date endDate;
 
     // 支付的日期
     @Column(name = "start_date")
+    @Temporal(TemporalType.DATE)
     private Date startDate;
 
     // 购买的类型 1：AUD199/year； 2：AUD89/season
